@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block body %}
+    <form method="post">
+        <div class="container col-10">
+            <br>
+
+            <br>
+            <h4> {{ way }} </h4>
+<br>
+        <div class="container col-12">
+            <button  class="w-20 bt"  type="submit" name="action" value="return"><img src="/static/image/return.svg" width="50" class="ui mini rounded image"></button>
+            <a class="w-20" href="/collection/add/{{ id }}"><img src="/static/image/add.svg" width="50" class="ui mini rounded image"></a>
+            <a class="w-20" href="/collection/category/add/{{ id }}"><img src="/static/image/addfolder.svg" width="60" class="ui mini rounded image"></a>
+        </div>
+
+            <table class="ui very basic collapsing celled table">
+                <tbody>
+                {% for n in cat %}
+                    <tr>
+                        <td>
+                            <img src="/static/image/folder.svg" height="50" class="ui mini rounded image">
+                        </td>
+                        <td>
+                            <a class="w-100" href="/collection/category/{{n.id}}" ><h3>{{n.name}}</h3></a>
+                        </td>
+                        <td>
+                            <a class="w-20" href="/collection/category/delete/{{n.id}}"><img src="/static/image/delete.svg" height="50" class="ui mini rounded image"></a>
+                        </td>
+                        <td>
+                            <a class="w-20" href="/collection/category/move/{{n.id}}/0"><img src="/static/image/move.svg" height="50" class="ui mini rounded image"></a>
+                        </td>
+                        <td>
+                            <a class="w-20" href="/category/{{n.id}}"><img src="/static/image/edit.svg" height="50" class="ui mini rounded image"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for n in coll %}
+                    <tr>
+                        <td>
+                            <img src="/static/uploads/{{ n.image }}" height="50" width="50" class="ui mini rounded image">
+                        </td>
+                        <td>
+                            <a class="w-100" href="/collection/{{n.id}}"><h3>{{n.Name}}</h3></a>
+                        </td>
+                    <td>
+                            <a class="w-20" href="/collection/delete/{{n.id}}"><img src="/static/image/delete.svg" height="50" class="ui mini rounded image"></a>
+                        </td>
+                        <td>
+                            <a class="w-20" href="/collection/move/{{n.id}}/0"><img src="/static/image/move.svg" height="50" class="ui mini rounded image"></a>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+{% endblock %}

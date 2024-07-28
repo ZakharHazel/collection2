@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block body %}
+    <form method="post">
+        <div class="container col-10">
+            <br>
+            <br>
+            <h4> {{ way }} </h4>
+<br>
+            <div>
+                <button class="w-20 bt" type="submit" name="action" value="return"><img src="/static/image/return.svg" width="50" class="ui mini rounded image"></button>
+                <button class="w-20 bt" type="submit" name="action" value="cancel"><img src="/static/image/cancel.svg" width="50" class="ui mini rounded image"></button>
+                <button class="w-20 bt" type="submit" name="action" value="save"><img src="/static/image/input.svg" width="50" class="ui mini rounded image"></button>
+            </div>
+            <table class="ui very basic collapsing celled table">
+                <tbody>
+                {% for n in cat %}
+                    <tr>
+                        <td>
+                            <img src="/static/image/folder.svg" height="50" class="ui mini rounded image">
+                        </td>
+                        <td>
+                            <a class="w-100" href="/collection/category/move/{{iddd}}/{{n.id}}" ><h3>{{n.name}}</h3></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+{% endblock %}
+

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="container col-6">
+        <br>
+        <h4 class="mb-3">Удалить?</h4>
+        <form method="post">
+            <hr class="my-4">
+            <button name="action" value="yes" class="w-100 btn btn-primary btn-lg" type="submit">Да</button>
+            <button name="action" value="no" class="w-100 btn btn-primary btn-lg" type="submit">Нет</button>
+        </form>
+    </div>
+{% endblock %}
+

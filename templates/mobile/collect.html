@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+    <form enctype="multipart/form-data" method="post">
+        <div class="container col-6">
+            <br>
+            <div class="row g-3">
+                <div class="col-sm-12">
+                    <img height="150" src="/static/uploads/{{ coll.image }}" class="ui mini rounded image">
+                </div>
+
+
+
+                <div class="col-sm-6">
+                    <label class="form-label">Год</label>
+                    <input name="Year" type="text" class="form-control" placeholder="Год" value="{{ coll.Year }}">
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="country" class="form-label">Фото</label>
+                    <input name="img" type="file" class="form-control" >
+                </div>
+
+                <div class="col-sm-6">
+                    <label class="form-label">Описание</label>
+                    <input name="Description" type="text" class="form-control" placeholder="Описание" value="{{ coll.name}}">
+                    <div class="invalid-feedback">
+                        Please enter your shipping address.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
