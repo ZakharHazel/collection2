@@ -12,6 +12,7 @@ Mobility(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///newflask.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD'] = upload_folder
+app.config['SECRET_KEY'] = '12345'
 db = SQLAlchemy(app)
 
 
@@ -230,12 +231,19 @@ def delete_category(template, id):
         Cat = Category.query.filter_by(id=id).first()
         idd = Cat.parent_category
         if request.form['action'] == 'yes':
-            try:
-                db.session.delete(Cat)
-                db.session.commit()
+            a=0
+            catt =Category.query.filter_by(parent_category=id).all()
+            coll = Collection.query.filter_by(Category=id).all()
+            if len(catt)>0 or len(coll)>0:
                 return redirect('/collection/category/'+ str(idd))
-            except:
-                return redirect('/collection/category/delete/'+ str(idd))
+            else:
+                try:
+                    db.session.delete(Cat)
+                    db.session.commit()
+                    return redirect('/collection/category/'+ str(idd))
+                except:
+                    return redirect('/collection/category/delete/'+ str(idd))
+            
         if request.form['action'] == 'no':
             return redirect('/collection/category/' + str(idd))
     else:
