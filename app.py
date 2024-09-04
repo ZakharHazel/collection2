@@ -131,15 +131,16 @@ def delete_collection(template, id):
     # Страница добавления новой категории
     if request.method == 'POST':
         Coll = Collection.query.filter_by(id=id).first()
+        print(Coll)
         idd = Coll.Category
         if request.form['action'] == 'yes':
-            try:
-                os.remove('static/uploads/' + Coll.image)
-                db.session.delete(Coll)
-                db.session.commit()
-                return redirect('/collection/category/'+ str(idd))
-            except:
-                return redirect('/collection/delete/'+ str(id))
+            #try:
+                #os.remove('static/uploads/' + Coll.image)
+            db.session.delete(Coll)
+            db.session.commit()
+            return redirect('/collection/category/0')
+            #except:
+                #return redirect('/collection/delete/'+ str(id))
         if request.form['action'] == 'no':
             return redirect('/collection/category/' + str(idd))
     else:
@@ -242,7 +243,7 @@ def delete_category(template, id):
                     db.session.commit()
                     return redirect('/collection/category/'+ str(idd))
                 except:
-                    return redirect('/collection/category/delete/'+ str(idd))
+                    return redirect('/collection/category/delete/'+ str(id))
             
         if request.form['action'] == 'no':
             return redirect('/collection/category/' + str(idd))
@@ -287,4 +288,4 @@ def move_category(template, id, iddd):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='192.168.0.100', debug=True)
