@@ -67,11 +67,6 @@ def folder(template, id):
         return render_template(template, coll=coll, cat=cat, id=id, way=way)
 
 
-
-
-
-
-
 @app.route('/collection/<int:id>', methods=['POST', 'GET'])
 @mobile_template("{mobile/}collect.html")
 def update_collection(template, id):
@@ -112,7 +107,7 @@ def add_collection(template, id):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD'], filename))
             except:
-                filename = 'Base.jpg'
+                filename = 'Base.png'
             upload = Collection(image=filename, Category=id, Year=request.form['Year'], Name=request.form['Name'])
             try:
                 db.session.add(upload)
@@ -134,13 +129,14 @@ def delete_collection(template, id):
         print(Coll)
         idd = Coll.Category
         if request.form['action'] == 'yes':
-            #try:
-                #os.remove('static/uploads/' + Coll.image)
-            db.session.delete(Coll)
-            db.session.commit()
-            return redirect('/collection/category/0')
-            #except:
-                #return redirect('/collection/delete/'+ str(id))
+            try:
+                if Coll.image != 'Base.png':
+                    os.remove('static/uploads/' + Coll.image)
+                db.session.delete(Coll)
+                db.session.commit()
+                return redirect('/collection/category/0')
+            except:
+                return redirect('/collection/delete/'+ str(id))
         if request.form['action'] == 'no':
             return redirect('/collection/category/' + str(idd))
     else:
